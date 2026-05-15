@@ -499,12 +499,22 @@
       background: var(--teal-l);
     }
 
+    @keyframes spin-icon {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
     .skill-icon {
       width: 20px; height: 20px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: transform 0.3s;
+    }
+
+    .skill-item:hover .skill-icon {
+      animation: spin-icon 0.6s linear;
     }
 
     .skill-icon img { width: 20px; height: 20px; object-fit: contain; }
@@ -692,7 +702,7 @@
     <div class="container">
       <div class="section-header reveal">
         <p class="section-eyebrow">Career</p>
-        <h2 class="section-title">Experience</h2>
+        <h2 class="section-title">Latest Experience</h2>
       </div>
 
       <div class="exp-list reveal">
@@ -941,6 +951,72 @@
       .catch(() => {
         document.getElementById('repo-grid').innerHTML = '<p id="repo-loading">Could not load repositories.</p>';
       });
+  </script>
+
+  <!-- Laser beams -->
+  <canvas id="laser-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+  <script>
+    (() => {
+      const canvas = document.getElementById('laser-canvas');
+      const ctx = canvas.getContext('2d');
+      const COLORS = ['#00ff44', '#ff2222', '#2288ff', '#ffe600'];
+      const LASERS = 3;
+
+      function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const lasers = Array.from({ length: LASERS }, (_, i) => ({
+        x:  Math.random() * window.innerWidth,
+        y:  Math.random() * window.innerHeight,
+        dx: (Math.random() * 1.5 + 1) * (Math.random() < 0.5 ? 1 : -1),
+        dy: (Math.random() * 1.5 + 1) * (Math.random() < 0.5 ? 1 : -1),
+        color: COLORS[i % COLORS.length],
+        trail: [],
+        trailLen: 80,
+      }));
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (const l of lasers) {
+          l.x += l.dx;
+          l.y += l.dy;
+
+          if (l.x < 0)            { l.x  = 0;             l.dx *= -1; }
+          if (l.x > canvas.width) { l.x  = canvas.width;  l.dx *= -1; }
+          if (l.y < 0)            { l.y  = 0;             l.dy *= -1; }
+          if (l.y > canvas.height){ l.y  = canvas.height; l.dy *= -1; }
+
+          l.trail.push({ x: l.x, y: l.y });
+          if (l.trail.length > l.trailLen) l.trail.shift();
+
+          if (l.trail.length < 2) continue;
+
+          for (let i = 1; i < l.trail.length; i++) {
+            const alpha = i / l.trail.length;
+            ctx.beginPath();
+            ctx.moveTo(l.trail[i - 1].x, l.trail[i - 1].y);
+            ctx.lineTo(l.trail[i].x, l.trail[i].y);
+            ctx.strokeStyle = l.color;
+            ctx.globalAlpha = alpha * 0.85;
+            ctx.lineWidth   = alpha * 2.5;
+            ctx.shadowColor = l.color;
+            ctx.shadowBlur  = 10;
+            ctx.stroke();
+          }
+          ctx.globalAlpha = 1;
+          ctx.shadowBlur  = 0;
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+    })();
   </script>
 
 </body>
