@@ -765,30 +765,71 @@
       .hero-eyebrow::before, .hero-eyebrow::after { display: none; }
     }
 
-    /* ── Accessibility Widget ── */
-    #a11y-btn {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      background: #1a3a6e;
+    /* ── Dark Mode Toggle ── */
+    #dark-toggle {
+      background: none;
       border: none;
       cursor: pointer;
+      padding: 6px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 100000;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-      transition: background 0.2s;
+      color: var(--muted);
+      transition: color 0.2s, background 0.2s;
     }
-    #a11y-btn:hover { background: #2a5298; }
-    #a11y-btn svg { width: 28px; height: 28px; fill: #fff; }
+    #dark-toggle:hover { background: var(--teal-l); color: var(--teal); }
+    #dark-toggle svg { width: 20px; height: 20px; display: block; }
+
+    /* ── Dark Mode ── */
+    body.dark {
+      --ink:    #F0EAE0;
+      --body:   #C0B8A8;
+      --off:    #1E1A15;
+      --white:  #141210;
+      --border: #3A3028;
+      --muted:  #706858;
+      --teal-l: rgba(255,102,51,0.12);
+    }
+    body.dark { background: #141210; color: #C0B8A8; }
+    body.dark nav {
+      background: rgba(20,18,16,0.95);
+      border-bottom-color: rgba(255,255,255,0.06);
+    }
+    body.dark #hero { background: #141210; }
+    body.dark section { background: #141210; }
+    body.dark section.alt { background: #1E1A15; }
+    body.dark section.dark { background: #0E0C0A; }
+    body.dark section.cream { background: #1E1A15; }
+    body.dark section.dark .exp-item { background: #1A1410; }
+    body.dark section.dark .exp-item:hover { background: #241C14; }
+    body.dark .exp-item { background: #1E1A15; }
+    body.dark .exp-item:hover { background: #2A2018; }
+    body.dark .award-card { background: #1E1A15; border-color: #3A3028; }
+    body.dark .skill-item { background: #1E1A15; border-color: #3A3028; }
+    body.dark .skill-item:hover { background: #2A2018; }
+    body.dark .hero-photo { border-color: var(--teal); }
+    body.dark #dark-toggle:hover { background: rgba(255,102,51,0.15); }
+
+    /* ── Accessibility Widget ── */
+    #a11y-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: color 0.2s, background 0.2s;
+    }
+    #a11y-btn:hover { background: var(--teal-l); color: var(--teal); }
+    #a11y-btn svg { width: 20px; height: 20px; display: block; }
 
     #a11y-panel {
       position: fixed;
-      bottom: 88px;
+      top: 76px;
       right: 24px;
       width: 260px;
       background: #fff;
@@ -796,7 +837,7 @@
       box-shadow: 0 8px 40px rgba(0,0,0,0.18);
       z-index: 99999;
       overflow: hidden;
-      transform: translateY(12px) scale(0.97);
+      transform: translateY(-8px) scale(0.97);
       opacity: 0;
       pointer-events: none;
       transition: transform 0.22s ease, opacity 0.22s ease;
@@ -855,6 +896,27 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li>
+        <button id="a11y-btn" aria-label="Accessibility Tools" onclick="document.getElementById('a11y-panel').classList.toggle('open')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="16" cy="4" r="2.5" fill="currentColor" stroke="none"/>
+            <path d="M16 6.5 L13.5 12"/>
+            <path d="M15 9 L19 10.5"/>
+            <path d="M13.5 12 L8.5 12"/>
+            <path d="M13.5 12 L14.5 16"/>
+            <path d="M8.5 12 L7.5 15.5"/>
+            <circle cx="9" cy="19.5" r="4"/>
+            <circle cx="16" cy="18.5" r="1.8"/>
+          </svg>
+        </button>
+      </li>
+      <li>
+        <button id="dark-toggle" aria-label="Toggle dark mode" onclick="toggleDark()">
+          <svg id="dark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </li>
     </ul>
   </nav>
 
@@ -1277,11 +1339,6 @@
   </script>
 
 
-  <!-- Accessibility Widget -->
-  <button id="a11y-btn" aria-label="Accessibility Tools" onclick="document.getElementById('a11y-panel').classList.toggle('open')">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="4" r="2"/><path d="M19 7H5l2 5h10l-1 5-4 2-4-2-1-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-  </button>
-
   <div id="a11y-panel" role="dialog" aria-label="Accessibility Tools">
     <h3>Accessibility Tools</h3>
     <button class="a11y-item" onclick="a11yToggle('a11y-text-lg', this)">
@@ -1356,6 +1413,16 @@
 
       window.a11yToggle = a11yToggle;
       window.a11yReset = a11yReset;
+
+      window.toggleDark = function() {
+        var isDark = document.body.classList.toggle('dark');
+        var icon = document.getElementById('dark-icon');
+        if (isDark) {
+          icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+        } else {
+          icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+        }
+      };
 
       document.addEventListener('click', function(e) {
         var panel = document.getElementById('a11y-panel');
