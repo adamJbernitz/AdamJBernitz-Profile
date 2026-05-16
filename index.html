@@ -764,6 +764,86 @@
       .hero-eyebrow { font-size: 0.75rem; gap: 0; }
       .hero-eyebrow::before, .hero-eyebrow::after { display: none; }
     }
+
+    /* ── Accessibility Widget ── */
+    #a11y-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: #1a3a6e;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100000;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      transition: background 0.2s;
+    }
+    #a11y-btn:hover { background: #2a5298; }
+    #a11y-btn svg { width: 28px; height: 28px; fill: #fff; }
+
+    #a11y-panel {
+      position: fixed;
+      bottom: 88px;
+      right: 24px;
+      width: 260px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+      z-index: 99999;
+      overflow: hidden;
+      transform: translateY(12px) scale(0.97);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+    #a11y-panel.open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      pointer-events: all;
+    }
+    #a11y-panel h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0d1f2d;
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid #e5e7eb;
+      margin: 0;
+    }
+    .a11y-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #374151;
+      font-weight: 500;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      transition: background 0.15s;
+    }
+    .a11y-item:hover { background: #f9fafb; }
+    .a11y-item.active { color: #FF6633; }
+    .a11y-item svg { width: 20px; height: 20px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .a11y-item.reset svg { stroke: none; fill: currentColor; }
+    .a11y-item.reset { color: #e53e3e; }
+    .a11y-item.reset:hover { background: #fff5f5; }
+
+    /* Accessibility states */
+    body.a11y-grayscale { filter: grayscale(100%); }
+    body.a11y-high-contrast { filter: contrast(150%) brightness(1.1); }
+    body.a11y-negative { filter: invert(100%) hue-rotate(180deg); }
+    body.a11y-light-bg { background: #fff !important; }
+    body.a11y-light-bg section { background: #fff !important; }
+    body.a11y-underline-links a { text-decoration: underline !important; }
+    body.a11y-readable * { font-family: Arial, sans-serif !important; letter-spacing: 0.02em !important; }
   </style>
 </head>
 <body>
@@ -1193,6 +1273,97 @@
       }
 
       draw();
+    })();
+  </script>
+
+
+  <!-- Accessibility Widget -->
+  <button id="a11y-btn" aria-label="Accessibility Tools" onclick="document.getElementById('a11y-panel').classList.toggle('open')">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="4" r="2"/><path d="M19 7H5l2 5h10l-1 5-4 2-4-2-1-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+  </button>
+
+  <div id="a11y-panel" role="dialog" aria-label="Accessibility Tools">
+    <h3>Accessibility Tools</h3>
+    <button class="a11y-item" onclick="a11yToggle('a11y-text-lg', this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      Increase Text
+    </button>
+    <button class="a11y-item" onclick="a11yToggle('a11y-text-sm', this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      Decrease Text
+    </button>
+    <button class="a11y-item" onclick="a11yToggle('a11y-grayscale', this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+      Grayscale
+    </button>
+    <button class="a11y-item" onclick="a11yToggle('a11y-high-contrast', this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18V3z" fill="currentColor" stroke="none"/></svg>
+      High Contrast
+    </button>
+    <button class="a11y-item" onclick="a11yToggle('a11y-negative', this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18V3z" fill="currentColor" stroke="none"/></svg>
+      Negative Contrast
+    </button>
+    <button class="a11y-item" onclick="a11yToggle('a11y-light-bg', this)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      Light Background
+    </button>
+    <button class="a11y-item" onclick="a11yToggle('a11y-underline-links', this)">
+      <svg viewBox="0 0 24 24"><path d="M6 3v7a6 6 0 0 0 12 0V3"/><line x1="4" y1="21" x2="20" y2="21"/></svg>
+      Links Underline
+    </button>
+    <button class="a11y-item" onclick="a11yToggle('a11y-readable', this)">
+      <svg viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+      Readable Font
+    </button>
+    <button class="a11y-item reset" onclick="a11yReset()">
+      <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+      Reset
+    </button>
+  </div>
+
+  <script>
+    (function() {
+      var textScale = 0;
+
+      function a11yToggle(cls, btn) {
+        if (cls === 'a11y-text-lg') {
+          textScale = Math.min(textScale + 1, 3);
+          applyTextScale();
+          if (btn) btn.classList.toggle('active', textScale > 0);
+          return;
+        }
+        if (cls === 'a11y-text-sm') {
+          textScale = Math.max(textScale - 1, -2);
+          applyTextScale();
+          if (btn) btn.classList.toggle('active', textScale < 0);
+          return;
+        }
+        document.body.classList.toggle(cls);
+        if (btn) btn.classList.toggle('active', document.body.classList.contains(cls));
+      }
+
+      function applyTextScale() {
+        document.documentElement.style.fontSize = (16 + textScale * 2) + 'px';
+      }
+
+      function a11yReset() {
+        ['a11y-grayscale','a11y-high-contrast','a11y-negative','a11y-light-bg','a11y-underline-links','a11y-readable'].forEach(function(c){ document.body.classList.remove(c); });
+        textScale = 0;
+        document.documentElement.style.fontSize = '';
+        document.querySelectorAll('.a11y-item').forEach(function(b){ b.classList.remove('active'); });
+      }
+
+      window.a11yToggle = a11yToggle;
+      window.a11yReset = a11yReset;
+
+      document.addEventListener('click', function(e) {
+        var panel = document.getElementById('a11y-panel');
+        var btn = document.getElementById('a11y-btn');
+        if (panel.classList.contains('open') && !panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+          panel.classList.remove('open');
+        }
+      });
     })();
   </script>
 
