@@ -1105,6 +1105,7 @@
       <li><a href="#experience" data-i18n="nav-exp">Experience</a></li>
       <li><a href="#skills" data-i18n="nav-skills">Skills</a></li>
       <li><a href="#education" data-i18n="nav-edu">Education</a></li>
+      <li><a href="#languages" data-i18n="nav-lang">Languages</a></li>
       <li><a href="#recommendations" data-i18n="nav-rec">Recommendations</a></li>
       <li>
         <button id="lang-btn" aria-label="Select language" onclick="document.getElementById('lang-panel').classList.toggle('open')">
@@ -1450,7 +1451,7 @@
   </section>
 
   <!-- LANGUAGES -->
-  <section class="alt">
+  <section id="languages" class="alt">
     <div class="container">
       <div class="section-header reveal">
         <p class="section-eyebrow">Communication</p>
@@ -1808,7 +1809,7 @@
       var currentLang = 'en';
       var T = {
         en: {
-          'nav-exp':'Experience','nav-skills':'Skills','nav-edu':'Education','nav-rec':'Recommendations',
+          'nav-exp':'Experience','nav-skills':'Skills','nav-edu':'Education','nav-lang':'Languages','nav-rec':'Recommendations',
           'eyebrow':'Raised in South Africa · Built in Israel',
           'hero-title':'Operations &amp;<br><em>Deal Flow.</em>',
           'hero-sub':'Supporting <strong>deal execution</strong>, proposal lifecycle, and full public tender submission team management.',
@@ -1818,7 +1819,7 @@
           'footer-right':'Tel Aviv District, Israel · © 2026'
         },
         he: {
-          'nav-exp':'ניסיון','nav-skills':'כישורים','nav-edu':'השכלה','nav-rec':'המלצות',
+          'nav-exp':'ניסיון','nav-skills':'כישורים','nav-edu':'השכלה','nav-lang':'שפות','nav-rec':'המלצות',
           'eyebrow':'גדלתי בדרום אפריקה · נבניתי בישראל',
           'hero-title':'פעילות &amp;<br><em>תזרים עסקאות.</em>',
           'hero-sub':'תמיכה ב<strong>ביצוע עסקאות</strong>, מחזור הצעות, וניהול מלא של צוות הגשת מכרזים ציבוריים.',
