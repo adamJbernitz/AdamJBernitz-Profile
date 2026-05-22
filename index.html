@@ -802,20 +802,62 @@
     }
 
     /* ── RESPONSIVE ── */
+    /* ── Hamburger button ── */
+    #menu-toggle {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      padding: 6px; border-radius: 8px;
+      color: var(--ink); flex-direction: column;
+      justify-content: center; align-items: center; gap: 5px;
+    }
+    #menu-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: currentColor; border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    #menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    #menu-toggle.open span:nth-child(2) { opacity: 0; }
+    #menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     @media (max-width: 768px) {
-      nav { padding: 0 1.2rem; gap: 0.5rem; }
-      .logo { font-size: 0.85rem; white-space: nowrap; }
-      nav ul { gap: 0.6rem; }
-      nav ul li a { font-size: 0.75rem; }
-      section { padding: 4rem 1.5rem; }
+      #menu-toggle { display: flex; }
+      nav { padding: 0 1.2rem; position: relative; flex-wrap: wrap; }
+      .logo { font-size: 0.9rem; white-space: nowrap; }
+      nav > ul {
+        display: none; flex-direction: column;
+        width: 100%; gap: 0;
+        background: var(--white); border-top: 1px solid var(--border);
+        padding: 0.5rem 0 0.75rem;
+        position: absolute; top: 100%; left: 0; right: 0;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        z-index: 9998;
+      }
+      nav > ul.mobile-open { display: flex; }
+      nav > ul li a {
+        display: block; padding: 0.65rem 1.5rem;
+        font-size: 0.95rem; font-weight: 500;
+        border-bottom: 1px solid var(--border);
+      }
+      nav > ul li:last-child a { border-bottom: none; }
+      nav .nav-icons { display: flex; align-items: center; gap: 0.25rem; }
+      section { padding: 3.5rem 1.2rem; }
       .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .edu-grid { grid-template-columns: 1fr; }
+      .lang-grid { grid-template-columns: 1fr 1fr; }
+      .rec-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; }
       .skills-grid { grid-template-columns: 1fr; }
       .repo-grid { grid-template-columns: 1fr; }
       .hero-eyebrow { font-size: 0.75rem; gap: 0; }
       .hero-eyebrow::before, .hero-eyebrow::after { display: none; }
+      .edu-logos { gap: 0.75rem; }
+      .edu-logo-main { height: 48px; max-width: 130px; }
+      .edu-logo-secondary { height: 38px; max-width: 110px; }
+      .skill-item[style*="grid-column"] { grid-column: 1 !important; }
     }
+
+    body.dark nav > ul { background: #161108; }
 
     /* ── Language Panel ── */
     #lang-btn {
@@ -1107,36 +1149,35 @@
       <li><a href="#education" data-i18n="nav-edu">Education</a></li>
       <li><a href="#languages" data-i18n="nav-lang">Languages</a></li>
       <li><a href="#recommendations" data-i18n="nav-rec">Recommendations</a></li>
-      <li>
-        <button id="lang-btn" aria-label="Select language" onclick="document.getElementById('lang-panel').classList.toggle('open')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-          </svg>
-        </button>
-      </li>
-      <li>
-        <button id="a11y-btn" aria-label="Accessibility Tools" onclick="document.getElementById('a11y-panel').classList.toggle('open')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="16" cy="4" r="2.5" fill="currentColor" stroke="none"/>
-            <path d="M16 6.5 L13.5 12"/>
-            <path d="M15 9 L19 10.5"/>
-            <path d="M13.5 12 L8.5 12"/>
-            <path d="M13.5 12 L14.5 16"/>
-            <path d="M8.5 12 L7.5 15.5"/>
-            <circle cx="9" cy="19.5" r="4"/>
-            <circle cx="16" cy="18.5" r="1.8"/>
-          </svg>
-        </button>
-      </li>
-      <li>
-        <button id="dark-toggle" aria-label="Toggle dark mode" onclick="toggleDark()">
-          <svg id="dark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-        </button>
-      </li>
     </ul>
+    <div class="nav-icons">
+      <button id="lang-btn" aria-label="Select language" onclick="document.getElementById('lang-panel').classList.toggle('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </button>
+      <button id="a11y-btn" aria-label="Accessibility Tools" onclick="document.getElementById('a11y-panel').classList.toggle('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="16" cy="4" r="2.5" fill="currentColor" stroke="none"/>
+          <path d="M16 6.5 L13.5 12"/>
+          <path d="M15 9 L19 10.5"/>
+          <path d="M13.5 12 L8.5 12"/>
+          <path d="M13.5 12 L14.5 16"/>
+          <path d="M8.5 12 L7.5 15.5"/>
+          <circle cx="9" cy="19.5" r="4"/>
+          <circle cx="16" cy="18.5" r="1.8"/>
+        </svg>
+      </button>
+      <button id="dark-toggle" aria-label="Toggle dark mode" onclick="toggleDark()">
+        <svg id="dark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <button id="menu-toggle" aria-label="Toggle menu" onclick="document.querySelector('nav > ul').classList.toggle('mobile-open'); this.classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -1348,7 +1389,7 @@
           <span class="skill-icon"><img src="https://www.google.com/s2/favicons?domain=microsoft.com&sz=128" alt="Microsoft 365" /></span>Microsoft 365: Analytical Dashboards
         </div>
         <div class="skill-item">
-          <span class="skill-icon"><img src="https://www.google.com/s2/favicons?domain=apollo.io&sz=128" alt="Apollo.io" /></span>Apollo.io: Autonomous Lead Generation
+          <span class="skill-icon"><img src="https://www.google.com/s2/favicons?domain=apollo.io&sz=128" alt="Apollo.io" /></span>Apollo.io: Advanced Integrations &amp; Outreach Automations
         </div>
         <div class="skill-item">
           <span class="skill-icon"><img src="https://cdn.simpleicons.org/github/0d1f2d" alt="GitHub" /></span>GitHub
@@ -2049,6 +2090,15 @@
         if (panel && panel.classList.contains('open') && !panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
           panel.classList.remove('open');
         }
+      });
+
+      // Close mobile menu when a nav link is tapped
+      document.querySelectorAll('nav > ul a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          document.querySelector('nav > ul').classList.remove('mobile-open');
+          var toggle = document.getElementById('menu-toggle');
+          if (toggle) toggle.classList.remove('open');
+        });
       });
 
       window.toggleDark = function() {
