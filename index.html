@@ -310,14 +310,57 @@
     /* ── SCROLL REVEAL ── */
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+      transform: translateY(36px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Stagger cards */
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1);
+    }
+    .stagger-item.visible { opacity: 1; transform: none; }
+
+    /* Hero orbs */
+    .hero-orb {
+      position: absolute; border-radius: 50%; pointer-events: none; z-index: 0;
+    }
+    .orb-a {
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(255,102,51,0.13) 0%, transparent 70%);
+      top: -160px; left: -120px;
+      animation: orbDrift 20s ease-in-out infinite alternate;
+    }
+    .orb-b {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(255,228,192,0.18) 0%, transparent 70%);
+      bottom: -80px; right: -100px;
+      animation: orbDrift 26s ease-in-out infinite alternate-reverse;
+    }
+    .orb-c {
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(255,102,51,0.09) 0%, transparent 70%);
+      top: 45%; left: 58%;
+      animation: orbDrift 17s ease-in-out infinite alternate;
+    }
+    @keyframes orbDrift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(50px, -35px) scale(1.12); }
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
+    /* Cursor glow */
+    #cursor-glow {
+      position: fixed; top: 0; left: 0;
+      width: 380px; height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,102,51,0.07) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+      will-change: transform;
+      transition: opacity 0.3s;
     }
+    @media (hover: none) { #cursor-glow { display: none; } }
 
     /* ── SECTION LAYOUT ── */
     section { padding: 8rem 3rem; }
@@ -601,7 +644,8 @@
       border-color: var(--teal);
       color: var(--ink);
       background: var(--teal-l);
-      box-shadow: 0 4px 16px rgba(255,102,51,0.12);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(255,102,51,0.18);
     }
 
     @keyframes spin-icon {
@@ -971,6 +1015,9 @@
 
   <!-- HERO -->
   <section id="hero">
+    <div class="hero-orb orb-a"></div>
+    <div class="hero-orb orb-b"></div>
+    <div class="hero-orb orb-c"></div>
 
     <!-- Birds -->
     <div class="birds">
@@ -1300,8 +1347,28 @@
     // scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // stagger cards
+    document.querySelectorAll('.skill-item, .stat-box, .edu-card, .lang-card').forEach((el, i) => {
+      el.classList.add('stagger-item');
+      el.style.transitionDelay = ((i % 8) * 65) + 'ms';
+      observer.observe(el);
+    });
+
+    // cursor glow
+    const glow = document.createElement('div');
+    glow.id = 'cursor-glow';
+    document.body.appendChild(glow);
+    let mx = 0, my = 0, cx = -999, cy = -999;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function animGlow(ts) {
+      cx += (mx - cx) * 0.1;
+      cy += (my - cy) * 0.1;
+      glow.style.transform = 'translate(' + (cx - 190) + 'px,' + (cy - 190) + 'px)';
+      requestAnimationFrame(animGlow);
+    })();
 
     // GitHub repos
     const langColors = {
