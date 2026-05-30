@@ -605,12 +605,45 @@
       z-index: 1;
       pointer-events: none;
     }
-    .edu-card-img img {
+    .edu-card-img > img.edu-photo {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
       display: block;
+    }
+    /* flag circle */
+    .edu-flag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.45);
+      z-index: 3;
+    }
+    /* Berlin card: photo bg + logo overlay */
+    .edu-card-img.berlin-card > img.edu-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 60%;
+      display: block;
+    }
+    .edu-hub-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .edu-hub-overlay img {
+      height: 52px;
+      width: auto;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.6)) brightness(1.1);
     }
     .edu-fact {
       font-size: 0.72rem;
@@ -632,33 +665,26 @@
       width: auto;
     }
 
-
-
+    /* split halves */
     .edu-card-img.split {
       display: flex;
       gap: 0;
     }
-    .edu-card-img.split img {
+    .edu-split-half {
+      position: relative;
       width: 50%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .edu-split-half:first-child {
+      border-right: 2px solid white;
+    }
+    .edu-split-half > img.edu-photo {
+      width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
       display: block;
-    }
-    .edu-card-img.split img:first-child {
-      border-right: 2px solid white;
-    }
-    .edu-card-img.logo-space {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f7f7f7;
-      padding: 1.5rem;
-    }
-    .edu-card-img.logo-space img {
-      width: auto;
-      height: 80px;
-      object-fit: contain;
     }
     /* ── STATS / AWARDS ── */
     .stats-grid {
@@ -1633,8 +1659,12 @@
           <p class="edu-period">Berlin, Germany · 2021</p>
           <div class="edu-row"><strong>Modules:</strong> Strategy &amp; Operations · Finance &amp; Accounting · Marketing · Economics &amp; International Business</div>
           <p class="edu-fact">Virtual programme · Member of Impact Hub Berlin</p>
-          <div class="edu-card-img logo-space">
-            <img src="https://berlin.impacthub.net/wp-content/uploads/2021/12/RED-Berlin-DG.png" alt="Impact Hub Berlin"/>
+          <div class="edu-card-img berlin-card">
+            <img class="edu-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Brandenburger_Tor_abends.jpg/1280px-Brandenburger_Tor_abends.jpg" alt="Berlin Brandenburg Gate"/>
+            <div class="edu-hub-overlay">
+              <img src="https://berlin.impacthub.net/wp-content/uploads/2021/12/RED-Berlin-DG.png" alt="Impact Hub Berlin"/>
+            </div>
+            <img class="edu-flag" src="https://flagcdn.com/w40/de.png" alt="Germany"/>
           </div>
         </div>
 
@@ -1653,7 +1683,8 @@
           <span class="badge">Top 2 in Faculty · Dean's List ×2</span>
           <p class="edu-fact">Top private higher education institute in Israel · Among the top 3 non-US universities globally for producing venture-backed unicorn founders</p>
           <div class="edu-card-img">
-            <img src="https://www.runi.ac.il/media/xfwhzg3j/home-page-slider-3.jpg?width=1366&format=webp" alt="Reichman University Campus"/>
+            <img class="edu-photo" src="https://www.runi.ac.il/media/xfwhzg3j/home-page-slider-3.jpg?width=1366&format=webp" alt="Reichman University Campus"/>
+            <img class="edu-flag" src="https://flagcdn.com/w40/il.png" alt="Israel"/>
           </div>
         </div>
 
@@ -1670,10 +1701,16 @@
           <div class="edu-row"><strong>Capstone:</strong> AI-Driven Fintech · Freelancers &amp; Digital&nbsp;Nomads</div>
           <div class="edu-row"><strong>Exchange:</strong> IMBA V-Exchange · LBS &amp; Applied Sciences Vienna</div>
           <span class="badge">MBA with Distinction</span>
-          <p class="edu-fact">Top 2% globally · Israel's fastest-growing research university · Virtual exchange with Lauder Business School (LBS), Vienna — ranked 2nd in Vienna &amp; Top 4 in Austria · ACBSP accredited</p>
+          <p class="edu-fact">Top 2% globally · Israel's fastest-growing research university · Virtual exchange with Lauder Business School (LBS), Vienna — Ranked 2nd in Vienna &amp; Top 4 among Austrian Applied Sciences Universities · ACBSP accredited</p>
           <div class="edu-card-img split">
-            <img src="https://biuinternational.com/wp-content/uploads/2022/07/pic3-1.jpg" alt="Bar-Ilan University Campus"/>
-            <img src="https://smapse.com/storage/2019/12/o1-1.jpg" alt="Lauder Business School Vienna"/>
+            <div class="edu-split-half">
+              <img class="edu-photo" src="https://biuinternational.com/wp-content/uploads/2022/07/pic3-1.jpg" alt="Bar-Ilan University Campus"/>
+              <img class="edu-flag" src="https://flagcdn.com/w40/il.png" alt="Israel"/>
+            </div>
+            <div class="edu-split-half">
+              <img class="edu-photo" src="https://smapse.com/storage/2019/12/o1-1.jpg" alt="Lauder Business School Vienna"/>
+              <img class="edu-flag" src="https://flagcdn.com/w40/at.png" alt="Austria"/>
+            </div>
           </div>
         </div>
       </div>
