@@ -679,6 +679,20 @@
     .skill-icon img { width: 20px; height: 20px; object-fit: contain; }
     .skill-icon svg { width: 20px; height: 20px; }
 
+
+    /* ── SKILLS WORKFLOW DIAGRAM ── */
+    .skills-diagram-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin-bottom: 3rem;
+    }
+    .skills-diagram {
+      display: block;
+      width: 100%;
+      min-width: 640px;
+      height: auto;
+    }
+
     /* ── LANGUAGES ── */
     .lang-grid {
       display: grid;
@@ -1325,6 +1339,100 @@
         <p class="section-eyebrow">Expertise</p>
         <h2 class="section-title">Skills &amp; Tools</h2>
       </div>
+
+      <!-- Workflow diagram -->
+      <div class="skills-diagram-wrap reveal">
+        <svg class="skills-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 215" aria-label="Skills workflow diagram">
+          <defs>
+            <marker id="arr-solid" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <polygon points="0 1, 7 3.5, 0 6" fill="#111111"/>
+            </marker>
+            <marker id="arr-muted" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <polygon points="0 1, 7 3.5, 0 6" fill="#aaaaaa"/>
+            </marker>
+          </defs>
+
+          <!-- Column headers -->
+          <text x="90"  y="16" text-anchor="middle" font-family="Manrope,sans-serif" font-size="8.5" font-weight="700" fill="#aaaaaa" letter-spacing="1">SOURCES</text>
+          <text x="280" y="16" text-anchor="middle" font-family="Manrope,sans-serif" font-size="8.5" font-weight="700" fill="#aaaaaa" letter-spacing="1">AI LAYER</text>
+          <text x="480" y="16" text-anchor="middle" font-family="Manrope,sans-serif" font-size="8.5" font-weight="700" fill="#aaaaaa" letter-spacing="1">AUTOMATION</text>
+          <text x="700" y="16" text-anchor="middle" font-family="Manrope,sans-serif" font-size="8.5" font-weight="700" fill="#aaaaaa" letter-spacing="1">OUTPUT</text>
+
+          <!-- Dividers -->
+          <line x1="183" y1="22" x2="183" y2="200" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,4"/>
+          <line x1="383" y1="22" x2="383" y2="200" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,4"/>
+          <line x1="590" y1="22" x2="590" y2="200" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3,4"/>
+
+          <!-- CONNECTIONS -->
+          <!-- Apollo → Claude AI -->
+          <path d="M 160 65 C 185 65 185 65 210 65" stroke="#111" stroke-width="1.4" fill="none" marker-end="url(#arr-solid)"/>
+          <!-- Airtable → Prompt Eng -->
+          <path d="M 160 115 C 185 115 185 115 210 115" stroke="#111" stroke-width="1.4" fill="none" marker-end="url(#arr-solid)"/>
+          <!-- GitHub → Prompt Eng (curve) -->
+          <path d="M 160 165 C 188 165 188 118 210 118" stroke="#aaa" stroke-width="1.1" fill="none" stroke-dasharray="5,3" marker-end="url(#arr-muted)"/>
+
+          <!-- Claude AI → N8N -->
+          <path d="M 350 65 C 375 65 375 65 410 65" stroke="#111" stroke-width="1.4" fill="none" marker-end="url(#arr-solid)"/>
+          <!-- Claude AI → HubSpot (curve) -->
+          <path d="M 350 68 C 378 68 378 112 410 115" stroke="#aaa" stroke-width="1.1" fill="none" stroke-dasharray="5,3" marker-end="url(#arr-muted)"/>
+          <!-- Prompt Eng → N8N (curve) -->
+          <path d="M 350 112 C 378 112 378 68 410 68" stroke="#aaa" stroke-width="1.1" fill="none" stroke-dasharray="5,3" marker-end="url(#arr-muted)"/>
+          <!-- Prompt Eng → HubSpot -->
+          <path d="M 350 115 C 375 115 375 115 410 115" stroke="#111" stroke-width="1.4" fill="none" marker-end="url(#arr-solid)"/>
+
+          <!-- N8N → CRM & Outreach -->
+          <path d="M 550 65 C 575 65 575 65 620 65" stroke="#111" stroke-width="1.4" fill="none" marker-end="url(#arr-solid)"/>
+          <!-- N8N → Dashboards (curve) -->
+          <path d="M 550 68 C 578 68 578 112 620 115" stroke="#aaa" stroke-width="1.1" fill="none" stroke-dasharray="5,3" marker-end="url(#arr-muted)"/>
+          <!-- HubSpot → CRM (curve) -->
+          <path d="M 550 112 C 578 112 578 68 620 68" stroke="#aaa" stroke-width="1.1" fill="none" stroke-dasharray="5,3" marker-end="url(#arr-muted)"/>
+          <!-- HubSpot → Dashboards -->
+          <path d="M 550 115 C 575 115 575 115 620 115" stroke="#111" stroke-width="1.4" fill="none" marker-end="url(#arr-solid)"/>
+          <!-- Slack → Enterprise Ops -->
+          <path d="M 550 165 C 575 165 575 165 620 165" stroke="#111" stroke-width="1.4" fill="none" marker-end="url(#arr-solid)"/>
+
+          <!-- ── NODES ── -->
+          <!-- Col 1: Sources -->
+          <rect x="20" y="47" width="140" height="36" rx="5" fill="white" stroke="#111" stroke-width="1.5"/>
+          <text x="90" y="70" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11.5" font-weight="600" fill="#111">Apollo.io</text>
+
+          <rect x="20" y="97" width="140" height="36" rx="5" fill="white" stroke="#111" stroke-width="1.5"/>
+          <text x="90" y="120" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11.5" font-weight="600" fill="#111">Airtable</text>
+
+          <rect x="20" y="147" width="140" height="36" rx="5" fill="white" stroke="#cccccc" stroke-width="1.5"/>
+          <text x="90" y="170" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11.5" font-weight="500" fill="#777">GitHub</text>
+
+          <!-- Col 2: AI Layer (inverted — black fill) -->
+          <rect x="210" y="47" width="140" height="36" rx="5" fill="#111" stroke="#111" stroke-width="1.5"/>
+          <text x="280" y="67" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10.5" font-weight="700" fill="white">Claude AI</text>
+          <text x="280" y="80" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="500" fill="rgba(255,255,255,0.65)">MCPs &amp; Agents</text>
+
+          <rect x="210" y="97" width="140" height="36" rx="5" fill="#111" stroke="#111" stroke-width="1.5"/>
+          <text x="280" y="117" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10.5" font-weight="700" fill="white">Prompt</text>
+          <text x="280" y="130" text-anchor="middle" font-family="Manrope,sans-serif" font-size="10.5" font-weight="700" fill="white">Engineering</text>
+
+          <!-- Col 3: Automation -->
+          <rect x="410" y="47" width="140" height="36" rx="5" fill="white" stroke="#111" stroke-width="1.5"/>
+          <text x="480" y="70" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11.5" font-weight="600" fill="#111">N8N Automations</text>
+
+          <rect x="410" y="97" width="140" height="36" rx="5" fill="white" stroke="#111" stroke-width="1.5"/>
+          <text x="480" y="120" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11.5" font-weight="600" fill="#111">HubSpot API</text>
+
+          <rect x="410" y="147" width="140" height="36" rx="5" fill="white" stroke="#111" stroke-width="1.5"/>
+          <text x="480" y="170" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11.5" font-weight="600" fill="#111">Slack API</text>
+
+          <!-- Col 4: Output -->
+          <rect x="620" y="47" width="160" height="36" rx="5" fill="white" stroke="#111" stroke-width="1.5"/>
+          <text x="700" y="70" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11.5" font-weight="600" fill="#111">CRM &amp; Outreach</text>
+
+          <rect x="620" y="97" width="160" height="36" rx="5" fill="white" stroke="#111" stroke-width="1.5"/>
+          <text x="700" y="120" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11.5" font-weight="600" fill="#111">Revenue Dashboards</text>
+
+          <rect x="620" y="147" width="160" height="36" rx="5" fill="white" stroke="#111" stroke-width="1.5"/>
+          <text x="700" y="170" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11.5" font-weight="600" fill="#111">Enterprise Ops</text>
+        </svg>
+      </div>
+
       <div class="skills-grid reveal">
         <div class="skill-item">
           <span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#00b4a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-3"/><path d="m9 12 2 2 4-4"/></svg></span>Project Management
