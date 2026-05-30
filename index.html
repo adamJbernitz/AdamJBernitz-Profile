@@ -569,9 +569,13 @@
       margin-bottom: 0.35rem;
       display: flex;
       gap: 0.4rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .edu-row strong { color: var(--ink); font-weight: 600; flex-shrink: 0; }
+    .edu-row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
     .badge {
       display: inline-flex;
@@ -1662,13 +1666,13 @@
           <p class="edu-uni">Int'l Business Management Institute</p>
           <p class="edu-degree">Business Management Diploma</p>
           <p class="edu-period">Berlin, Germany · 2021</p>
-          <div class="edu-row"><strong>Modules:</strong> Strategy &amp; Operations · Finance &amp; Accounting · Marketing · Economics &amp; International Business</div>
-          <p class="edu-fact">Virtual programme · Member of Impact Hub Berlin</p>
+          <div class="edu-row"><strong>Modules:</strong><span> Strategy &amp; Operations · Finance &amp; Accounting · Marketing · Economics &amp; International Business</span></div>
+          <p class="edu-fact">Virtual programme</p>
+          <div class="edu-partner-logo">
+            <img src="https://berlin.impacthub.net/wp-content/uploads/2021/12/RED-Berlin-DG.png" alt="Member of Impact Hub Berlin"/>
+          </div>
           <div class="edu-card-img berlin-card">
             <img class="edu-photo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Brandenburger_Tor_abends.jpg/1280px-Brandenburger_Tor_abends.jpg" alt="Berlin Brandenburg Gate"/>
-            <div class="edu-hub-overlay">
-              <img src="https://berlin.impacthub.net/wp-content/uploads/2021/12/RED-Berlin-DG.png" alt="Impact Hub Berlin"/>
-            </div>
             <img class="edu-flag" src="https://flagcdn.com/w40/de.png" alt="Germany"/>
           </div>
         </div>
@@ -1682,9 +1686,9 @@
           <p class="edu-uni">Reichman University (IDC Herzliya)</p>
           <p class="edu-degree">B.A. in PolSci &amp; Sust. (Honors), CT &amp; HLS</p>
           <p class="edu-period">October 2020 – September 2023</p>
-          <div class="edu-row"><strong>GPA:</strong> +94%, Magna Cum Laude</div>
-          <div class="edu-row"><strong>Capstone:</strong> VCM Blockchain-based Microfinancing</div>
-          <div class="edu-row"><strong>Role:</strong> Class President · Hi-Tech CO-OP Alumnus</div>
+          <div class="edu-row"><strong>GPA:</strong><span> +94%, Magna Cum Laude</span></div>
+          <div class="edu-row"><strong>Capstone:</strong><span> VCM Blockchain-based Microfinancing</span></div>
+          <div class="edu-row"><strong>Role:</strong><span> Class President · Hi-Tech CO-OP Alumnus</span></div>
           <span class="badge">Top 2 in Faculty · Dean's List ×2</span>
           <p class="edu-fact">Top private higher education institute in Israel · Among the top 3 non-US universities globally for producing venture-backed unicorn founders</p>
           <div class="edu-card-img">
@@ -1702,9 +1706,9 @@
           <p class="edu-uni">Bar-Ilan University</p>
           <p class="edu-degree">MBA, Master of Business Administration</p>
           <p class="edu-period">May 2024 – September 2025</p>
-          <div class="edu-row"><strong>GPA:</strong> +92%</div>
-          <div class="edu-row"><strong>Capstone:</strong> AI-Driven Fintech · Freelancers &amp; Digital&nbsp;Nomads</div>
-          <div class="edu-row"><strong>Exchange:</strong> IMBA V-Exchange · LBS &amp; Applied Sciences Vienna</div>
+          <div class="edu-row"><strong>GPA:</strong><span> +92%</span></div>
+          <div class="edu-row"><strong>Capstone:</strong><span> AI-Driven Fintech · Freelancers &amp; Digital Nomads</span></div>
+          <div class="edu-row"><strong>Exchange:</strong><span> IMBA V-Exchange · LBS &amp; Applied Sciences Vienna</span></div>
           <span class="badge">MBA with Distinction</span>
           <p class="edu-fact">Top 2% globally · Israel's fastest-growing research university · Virtual exchange with Lauder Business School (LBS), Vienna — Ranked 2nd in Vienna &amp; Top 4 among Austrian Applied Sciences Universities · ACBSP accredited</p>
           <div class="edu-card-img split">
