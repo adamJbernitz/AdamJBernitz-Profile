@@ -610,7 +610,6 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
-      filter: grayscale(100%);
       display: block;
     }
     .edu-fact {
@@ -631,10 +630,21 @@
     .edu-partner-logo img {
       height: 32px;
       width: auto;
-      filter: grayscale(100%);
-      opacity: 0.7;
     }
 
+
+    .edu-card-img.logo-space {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f7f7f7;
+      padding: 1.5rem;
+    }
+    .edu-card-img.logo-space img {
+      width: auto;
+      height: 80px;
+      object-fit: contain;
+    }
     /* ── STATS / AWARDS ── */
     .stats-grid {
       display: grid;
@@ -1607,8 +1617,9 @@
           <p class="edu-degree">Business Management Diploma</p>
           <p class="edu-period">Berlin, Germany · 2021</p>
           <div class="edu-row"><strong>Modules:</strong> Strategy &amp; Operations · Finance &amp; Accounting · Marketing · Economics &amp; International Business</div>
-          <div class="edu-partner-logo">
-            <img src="https://berlin.impacthub.net/wp-content/uploads/2021/12/RED-Berlin-DG.png" alt="Member of Impact Hub Berlin"/>
+          <p class="edu-fact">Virtual programme · Member of Impact Hub Berlin</p>
+          <div class="edu-card-img logo-space">
+            <img src="https://berlin.impacthub.net/wp-content/uploads/2021/12/RED-Berlin-DG.png" alt="Impact Hub Berlin"/>
           </div>
         </div>
 
@@ -1627,7 +1638,7 @@
           <span class="badge">Top 2 in Faculty · Dean's List ×2</span>
           <p class="edu-fact">Top private higher education institute in Israel · Among the top 3 non-US universities globally for producing venture-backed unicorn founders</p>
           <div class="edu-card-img">
-            <img src="https://www.runi.ac.il/media/vzmdwz1q/shdera-flags.png" alt="Reichman University Campus"/>
+            <img src="https://www.runi.ac.il/media/xfwhzg3j/home-page-slider-3.jpg?width=1366&format=webp" alt="Reichman University Campus"/>
           </div>
         </div>
 
@@ -1644,9 +1655,9 @@
           <div class="edu-row"><strong>Capstone:</strong> AI-Driven Fintech · Freelancers &amp; Digital&nbsp;Nomads</div>
           <div class="edu-row"><strong>Exchange:</strong> IMBA V-Exchange · LBS &amp; Applied Sciences Vienna</div>
           <span class="badge">MBA with Distinction</span>
-          <p class="edu-fact">Top 2% globally · Israel's fastest-growing research university</p>
+          <p class="edu-fact">Top 2% globally · Israel's fastest-growing research university · Virtual exchange with Lauder Business School (LBS), Vienna — ranked 2nd in Vienna &amp; 4th in Austria (of 17 Universities of Applied Sciences) · ACBSP accredited</p>
           <div class="edu-card-img">
-            <img src="https://www.biu.ac.il/sites/default/files/2020-11/stwdntym_0.jpg" alt="Bar-Ilan University Campus"/>
+            <img src="https://biuinternational.com/wp-content/uploads/2022/07/pic3-1.jpg" alt="Bar-Ilan University Campus"/>
           </div>
         </div>
       </div>
