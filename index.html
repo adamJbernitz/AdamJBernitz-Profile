@@ -1319,7 +1319,54 @@
       .rec-grid { grid-template-columns: 1fr; }
     }
 
-  </style>
+  
+    /* ── MUSIC TOGGLE ── */
+    .music-toggle {
+      position: absolute;
+      bottom: 2rem;
+      left: 2rem;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .music-toggle-track {
+      width: 52px;
+      height: 28px;
+      border-radius: 14px;
+      background: #ff5500;
+      position: relative;
+      transition: background 0.3s ease;
+      box-shadow: 0 0 10px rgba(255,85,0,0.7);
+    }
+    .music-toggle-track.on {
+      background: #00c853;
+      box-shadow: 0 0 10px rgba(0,200,83,0.7);
+    }
+    .music-toggle-thumb {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 0.3s ease;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    }
+    .music-toggle-track.on .music-toggle-thumb {
+      transform: translateX(24px);
+    }
+    .music-toggle-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+</style>
 </head>
 <body>
 
@@ -1375,6 +1422,15 @@
       <source src="https://cdn.coverr.co/videos/coverr-rocky-mountains-partially-covered-by-snow-9754/1080p.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
+    <audio id="bg-music" loop preload="none">
+      <source src="music.mp3" type="audio/mpeg">
+    </audio>
+    <div class="music-toggle" id="music-toggle" onclick="toggleMusic()" title="Toggle music">
+      <div class="music-toggle-track" id="music-track">
+        <div class="music-toggle-thumb"></div>
+      </div>
+      <span class="music-toggle-label" id="music-label">Music</span>
+    </div>
 
     <div class="hero-orb orb-a"></div>
     <div class="hero-orb orb-b"></div>
@@ -2543,7 +2599,19 @@
         }
       });
     })();
-  </script>
+  
+  function toggleMusic() {
+    var audio = document.getElementById('bg-music');
+    var track = document.getElementById('music-track');
+    if (audio.paused) {
+      audio.play();
+      track.classList.add('on');
+    } else {
+      audio.pause();
+      track.classList.remove('on');
+    }
+  }
+</script>
 
 </body>
 </html>
