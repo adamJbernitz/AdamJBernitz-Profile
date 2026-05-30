@@ -798,14 +798,15 @@
 
     /* ── FOOTER ── */
     footer {
-      background: var(--ink);
-      color: rgba(255,255,255,0.4);
-      padding: 3rem;
+      background: linear-gradient(135deg, #0D1F2D 0%, #0a2a2a 100%);
+      color: rgba(255,255,255,0.45);
+      padding: 2.5rem 4rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1rem;
+      border-top: 1px solid rgba(0,201,184,0.15);
     }
 
     .footer-name {
@@ -815,6 +816,23 @@
       letter-spacing: -0.02em;
       color: var(--white);
     }
+
+    .footer-name span { color: var(--teal); }
+
+    .footer-center {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .footer-center a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: color 0.2s;
+    }
+
+    .footer-center a:hover { color: var(--teal); }
 
     .footer-right {
       font-size: 0.78rem;
@@ -1715,7 +1733,13 @@
 
   <!-- FOOTER -->
   <footer>
-    <span class="footer-name">Adam J. Bernitz</span>
+    <span class="footer-name">Adam <span>J.</span> Bernitz</span>
+    <div class="footer-center">
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#recommendations">Recommendations</a>
+    </div>
     <span class="footer-right" data-i18n="footer-right">Tel Aviv District, Israel &nbsp;·&nbsp; © 2026</span>
   </footer>
   <div style="text-align:center;padding:0.6rem;background:#f9f9f9;border-top:1px solid #eee;font-size:0.75rem;color:#888;">
