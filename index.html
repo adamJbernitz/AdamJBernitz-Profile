@@ -834,6 +834,33 @@
 
     .footer-center a:hover { color: #ffffff; }
 
+
+    .footer-badges {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-badge-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-size: 0.75rem;
+    }
+    .footer-badge-link:hover { color: rgba(255,255,255,0.8); }
+    .footer-badge-icon {
+      width: 13px;
+      height: 13px;
+      object-fit: contain;
+      filter: grayscale(100%) brightness(2);
+      opacity: 0.5;
+    }
+    .footer-badge-sep { opacity: 0.3; }
+
     .footer-right {
       font-size: 0.78rem;
     }
@@ -1927,10 +1954,20 @@
   <!-- FOOTER -->
   <footer>
     <span class="footer-name">Adam <span>J.</span> Bernitz</span>
+    <div class="footer-badges">
+      <a href="https://www.cloudflare.com" target="_blank" rel="noopener" class="footer-badge-link">
+        <img src="https://www.cloudflare.com/favicon.ico" alt="Cloudflare" class="footer-badge-icon">
+        <span>Secured by Cloudflare</span>
+      </a>
+      <span class="footer-badge-sep">·</span>
+      <a href="https://uptimerobot.com" target="_blank" rel="noopener" class="footer-badge-link">
+        <img src="https://uptimerobot.com/favicon.ico" alt="UptimeRobot" class="footer-badge-icon">
+        <span>Monitored by UptimeRobot</span>
+      </a>
+    </div>
     <span class="footer-right">© 2026</span>
   </footer>
   <div style="text-align:center;padding:0.6rem;background:#f9f9f9;border-top:1px solid #eee;font-size:0.75rem;color:#888;">
-    <img src="https://www.cloudflare.com/favicon.ico" alt="Cloudflare" style="height:14px;vertical-align:middle;margin-right:5px;">Protected by <a href="https://www.cloudflare.com" target="_blank" rel="noopener" style="color:#f38020;text-decoration:none;font-weight:600;">Cloudflare</a>
   </div>
 
   <script>
