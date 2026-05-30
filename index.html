@@ -64,6 +64,23 @@
     nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
     .nav-icons { display: flex; align-items: center; gap: 0.25rem; flex-shrink: 0; }
 
+
+    .nav-donate {
+      display: inline-flex;
+      align-items: center;
+      background: #111111;
+      color: #ffffff !important;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.4rem 1.1rem;
+      border-radius: 4px;
+      text-decoration: none !important;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.01em;
+      border: 2px solid #111111;
+    }
+    .nav-donate:hover { background: #000000; border-color: #000000; transform: translateY(-1px); }
+
     .nav-linkedin {
       display: inline-flex;
       align-items: center;
@@ -1163,6 +1180,7 @@
       <li><a href="#education" data-i18n="nav-edu">Education</a></li>
       <li><a href="#languages" data-i18n="nav-lang">Languages</a></li>
       <li><a href="#recommendations" data-i18n="nav-rec">Recommendations</a></li>
+      <li><a href="https://www.mdais.org/en/donate-mda" target="_blank" rel="noopener" class="nav-donate">Save a Life</a></li>
     </ul>
     <div class="nav-icons">
       <a href="https://linkedin.com/in/adamjbernitz" target="_blank" rel="noopener" class="nav-linkedin" aria-label="LinkedIn">
